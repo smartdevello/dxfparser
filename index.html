@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.3/xlsx.full.min.js"></script>
+
+        <meta charset="utf-8"/>
+        <script src="./vendor/dxf-parser/dist/dxf-parser.js"></script>
+        <script src="./vendor/jquery.min.js"></script>        
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+        <!-- Three.js -->
+        <script src="./vendor/three/build/three.min.js"></script>
+        <script src="./vendor/three-dxf/dist/three-dxf.js"></script>
+        <script src="./fonts/helvetiker_regular.typeface.js"></script>
+
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.2/require.min.js'></script>
+        <style>
+
+            #cadContainer {
+                padding: 24px;
+            }
+            #cad-view > canvas {
+                padding-left: 0;
+                padding-right: 0;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+                width: 800px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="container">
+            <div role="form">
+                <div class="form-group">
+                    <label for="exampleInputFile">Choose a DXF file</label>
+                    <input type="file" accept=".dxf" id="dxf" name="file">
+
+                </div>
+            </div>
+
+        </div>
+        <div>
+            <span id="cad-view">
+                <div id="cadContainer" style="display: none; margin-bottom: 12px;">
+                    <input class="btn" style="margin-right: 12px" type="button" id="decreaseZoom" value="-" />
+                    <input class="btn btn-primary" type="button" id="increaseZoom" value="+" />
+                </div>
+
+            </span>
+        </div>
+
+
+
+        <!-- script -->
+        <script src="index.js"></script>
+    </body>
+</html>
