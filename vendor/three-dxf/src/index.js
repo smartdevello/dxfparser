@@ -163,7 +163,7 @@ export function Viewer(data, parent, width, height, font) {
 
     renderer = this.renderer = new THREE.WebGLRenderer();
     renderer.setSize(width, height);
-    renderer.setClearColor(0x212121, 1);
+    renderer.setClearColor(0xffffff, 1);
 
     parent.appendChild(renderer.domElement);
     parent.style.display = 'block';
@@ -236,7 +236,7 @@ export function Viewer(data, parent, width, height, font) {
         }
         this.render()
         for ( var i = 0; i < intersects.length; i++ ) {
-            intersects[ i ].material.color.set( 0xff0505 );
+            intersects[ i ].material.color.set( 0x212121 );
         }
         
     }
@@ -379,13 +379,23 @@ export function Viewer(data, parent, width, height, font) {
     }
 
     function drawEllipse(entity, data) {
+
+        
         var color = getColor(entity, data);
 
-        var xrad = Math.sqrt(Math.pow(entity.majorAxisEndPoint.x,2) + Math.pow(entity.majorAxisEndPoint.y,2));
+        var xrad = Math.sqrt(Math.pow(entity.majorX,2) + Math.pow(entity.majorY,2));
         var yrad = xrad*entity.axisRatio;
-        var rotation = Math.atan2(entity.majorAxisEndPoint.y, entity.majorAxisEndPoint.x);
+        var rotation = Math.atan2(entity.majorY, entity.majorX);
 
-        var curve = new THREE.EllipseCurve( 0, 0, xrad, yrad, alpha, beta, false, rotation );
+        // var curve = new THREE.EllipseCurve( 0, 0, xrad, yrad, alpha, beta, false, rotation );
+        var curve = new THREE.EllipseCurve(
+            entity.x,  entity.y,
+            xrad, yrad,
+            entity.startAngle, entity.endAngle,
+            false, // Always counterclockwise
+            rotation
+        );
+
 
         var points = curve.getPoints( 50 );
         var geometry = new THREE.BufferGeometry().setFromPoints( points );
@@ -745,6 +755,7 @@ export function Viewer(data, parent, width, height, font) {
             color = 0x000000;
         }
 
+        return 0x212121;
         return 0xff0505;
         return color;
     }
